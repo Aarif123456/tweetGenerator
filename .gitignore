@@ -1,0 +1,4 @@
+__pycache__/
+# Resources/tweets/
+# Output/
+Resources/*.csv
