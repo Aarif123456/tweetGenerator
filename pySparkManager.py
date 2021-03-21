@@ -3,9 +3,10 @@ import os
 from pyspark.sql import SparkSession
 
 # probably misconfiguration on my environment - but this forces PySpark to use Python 3
-os.environ["PYSPARK_PYTHON"]="/usr/bin/python3"
+os.environ["PYSPARK_PYTHON"] = "/usr/bin/python3"
 
-def createSpark(app_name:str):
+
+def createSpark(app_name: str):
     return SparkSession \
         .builder \
         .appName(app_name) \
