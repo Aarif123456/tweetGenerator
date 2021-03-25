@@ -1,0 +1,7 @@
+README.md
+pyproject.toml
+setup.py
+TweetBot.egg-info/PKG-INFO
+TweetBot.egg-info/SOURCES.txt
+TweetBot.egg-info/dependency_links.txt
+TweetBot.egg-info/top_level.txt
