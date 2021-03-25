@@ -29,10 +29,10 @@ dtypes = StructType([StructField("created_at", TimestampType(), True),
                      ])
 
 if __name__ == "__main__":
-    file_paths = ["Resources/hashtag_donaldtrump.csv", "Resources/hashtag_joebiden.csv"]
+    filePaths = ["Resources/hashtag_donaldtrump.csv", "Resources/hashtag_joebiden.csv"]
     schemes = [dtypes, dtypes]
     spark = createSpark("tweet creator")
-    names = extractTarget(spark, file_paths, schemes)
+    names = extractTarget(spark, filePaths, schemes)
     # link to some random article
     url = "https://t.co/bqa5pIAOnk"
     for name in names:

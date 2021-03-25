@@ -6,8 +6,8 @@ from warnings import warn
 from os import path
 
 
-def createCorpusForUser(username, tweet_limit=5000):
-    filePath = "Resources/tweets/" + username + ".corpus"
+def createCorpusForUser(username, filePath="Resources/tweets", tweetLimit=5000):
+    filePath += "/"+username + ".corpus"
     if not path.exists(filePath):
         print("Getting tweet for user:" + username)
         try:
@@ -15,7 +15,7 @@ def createCorpusForUser(username, tweet_limit=5000):
             # c.Store_csv= True
             c.Username = username
             c.Custom["tweet"] = "<|startoftext|>{tweet}<|endoftext|>"
-            c.Limit = tweet_limit
+            c.Limit = str(tweetLimit)
             c.Format = "<|startoftext|>{tweet}<|endoftext|>"
             c.Hide_output = True
             c.Output = filePath

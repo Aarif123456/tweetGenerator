@@ -12,24 +12,25 @@ class TweetText(markovify.Text):
             text)
 
 
-def generateTweet(username: str, url: str, num_tweets=10):
-    corpus_file = "Resources/tweets/" + username + ".corpus"
-    gen_file = "Output/tweets/" + username + ".tweets"
+def generateTweet(username: str, url: str, genFile="Output/tweets",
+                    corpusPath="Resources/tweets",numTweets=10):
+    corpusFile += "/" + username + ".corpus"
+    genFile += "/" + username + ".tweets"
     reply = "@" + username + " "
     url = " " + url
-    if os.path.exists(corpus_file):
+    if os.path.exists(corpusFile):
         # Get raw text as string.
-        with open(corpus_file) as f:
+        with open(corpusFile) as f:
             text = f.read()
-        max_tweet_length = max(0, 279 - len(url) - len(reply))
+        maxTweetLength = max(0, 279 - len(url) - len(reply))
         # Build the model.
         text_model = TweetText(text)
-        with open(gen_file, "w") as myfile:
+        with open(genFile, "w") as myfile:
             # Print three randomly-generated sentences of no more than 280 characters
-            for i in range(num_tweets):
-                gen = text_model.make_short_sentence(max_tweet_length)
+            for i in range(numTweets):
+                gen = text_model.make_short_sentence(maxTweetLength)
                 if gen == None:
-                    warn("WARNING: unable to create " + str(num_tweets) + "tweets for user " + username)
+                    warn("WARNING: unable to create " + str(numTweets) + "tweets for user " + username)
                     break
                 out = reply + gen + url
                 print(out)

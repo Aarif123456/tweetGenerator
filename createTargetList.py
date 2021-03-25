@@ -7,47 +7,47 @@ from os import path
 
 
 # read data from csv file
-def readTweetData(file_path: str, spark: SparkSession, schema: StructType):
+def readTweetData(filePath: str, spark: SparkSession, schema: StructType):
     return spark.read.option("multiLine", True) \
         .option("header", True) \
         .option("escape", "\"") \
         .schema(schema) \
-        .csv(path=file_path, inferSchema=(schema == None), enforceSchema=(schema != None), header=True)
+        .csv(path=filePath, inferSchema=(schema == None), enforceSchema=(schema != None), header=True)
 
 
-def writeListToFile(file_path: str, names: list, debug=False):
+def writeListToFile(filePath: str, names: list, debug=False):
     if debug:
         pprint(names)
-    with open(file_path, "w") as myfile:
+    with open(filePath, "w") as myfile:
         myfile.write("username\n")
         for name in names:
             myfile.write(name + "\n")
 
 
-def readTargetList(spark: SparkSession, file_path='Output/targetList.txt'):
-    df = spark.read.csv(path=file_path, \
+def readTargetList(spark: SparkSession, filePath='Output/targetList.txt'):
+    df = spark.read.csv(path=filePath, \
                         inferSchema=True, \
                         header=True)
     return [i.username for i in df.select('username').collect()]
 
 
 def extractTarget(spark: SparkSession, \
-                  file_paths: list, \
+                  filePaths: list, \
                   schemas: list, \
                   debug=False,
-                  output_file="Output/targetList.txt") -> list:
-    if len(file_paths) != len(schemas):
-        raise Exception("ERROR: file_paths and schema must be the same length")
-    names_set = set()
-    for i in range(len(file_paths)):
-        if not path.exists(file_paths[i]):
+                  outputFile="Output/targetList.txt") -> list:
+    if len(filePaths) != len(schemas):
+        raise Exception("ERROR: filePaths and schema must be the same length")
+    namesSet = set()
+    for i in range(len(filePaths)):
+        if not path.exists(filePaths[i]):
             warn("Please download csv files from https://www.kaggle.com/manchunhui/us-election-2020-tweets")
             return readTargetList(spark)
-        df = readTweetData(file_paths[i], spark, schemas[i])
+        df = readTweetData(filePaths[i], spark, schemas[i])
         names = set([i.user_screen_name for i in df.select('user_screen_name').distinct().collect()])
-        names_set = names_set.union(names)
-    names_list = list(names_set)
-    writeListToFile(output_file, names_list, debug)
+        namesSet = namesSet.union(names)
+    names_list = list(namesSet)
+    writeListToFile(outputFile, names_list, debug)
     return names_list
 
 # df[['tweet_id','tweet']].show(10)
