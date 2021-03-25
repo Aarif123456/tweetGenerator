@@ -3,8 +3,9 @@ import setuptools
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
+REQUIRED = ['markovify', 'twint', 'pyspark']
 setuptools.setup(
-    name="TweetBot", 
+    name="tweetGenerator", 
     version="0.0.1",
     author="Abdullah Arif",
     author_email="abdullahmeo11@gmail.com",
@@ -18,5 +19,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     packages=setuptools.find_packages(),
+    # packages=['tweetGenerator'],
+    install_requires=REQUIRED,
     python_requires='>=3.8',
 )
