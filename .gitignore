@@ -1,7 +1,8 @@
 __pycache__/
-# Resources/tweets/
+Resources/tweets/
 # Output/
 Resources/*.csv
 .*Zone\.Identifier
 /idea/
 /\.idea/
+/tweetBotVenv/
