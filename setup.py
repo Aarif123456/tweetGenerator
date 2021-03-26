@@ -19,7 +19,6 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     packages=setuptools.find_packages(),
-    # packages=['tweetGenerator'],
     install_requires=REQUIRED,
     python_requires='>=3.8',
 )
