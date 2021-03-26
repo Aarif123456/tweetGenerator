@@ -13,7 +13,7 @@ class TweetText(markovify.Text):
 
 
 def generateTweet(username: str, url: str, genFile="Output/tweets",
-                    corpusPath="Resources/tweets",numTweets=10):
+                    corpusFile="Resources/tweets",numTweets=10):
     corpusFile += "/" + username + ".corpus"
     genFile += "/" + username + ".tweets"
     reply = "@" + username + " "
